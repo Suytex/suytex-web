@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Suytex Academy — Próximamente</title>
+<meta name="description" content="Suytex Academy: una membresía para profesionales que quieren construir sus propias herramientas y automatizar su trabajo con inteligencia artificial." />
+
+<!-- Open Graph -->
+<meta property="og:title" content="Suytex Academy — Próximamente" />
+<meta property="og:description" content="Para profesionales que construyen, no solo aprenden." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://suytex.com" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --ink:        #0A0C12;
+    --ink-2:      #0E111A;
+    --text:       #ECEEF3;
+    --muted:      #7E8699;
+    --line:       rgba(255, 255, 255, 0.07);
+    --gold:       #E6B566;
+    --gold-soft:  rgba(230, 181, 102, 0.16);
+    --maxw:       760px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body { height: 100%; }
+
+  body {
+    background: var(--ink);
+    color: var(--text);
+    font-family: "Inter", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Signature: warm ambient glow that breathes behind the headline */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 38%;
+    left: 50%;
+    width: 90vw;
+    max-width: 900px;
+    aspect-ratio: 1;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, var(--gold-soft) 0%, transparent 62%);
+    filter: blur(8px);
+    z-index: 0;
+    pointer-events: none;
+    animation: breathe 9s ease-in-out infinite;
+  }
+
+  /* Signature: hairline baseline grid, barely there */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: linear-gradient(var(--line) 1px, transparent 1px);
+    background-size: 100% 88px;
+    mask-image: linear-gradient(180deg, transparent, #000 30%, #000 70%, transparent);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  @keyframes breathe {
+    0%, 100% { opacity: 0.75; transform: translate(-50%, -50%) scale(1); }
+    50%      { opacity: 1;    transform: translate(-50%, -50%) scale(1.08); }
+  }
+
+  /* Layout */
+  header, main, footer {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: var(--maxw);
+    margin-inline: auto;
+    padding-inline: 28px;
+  }
+
+  header {
+    padding-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .wordmark {
+    font-family: "Space Mono", monospace;
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.34em;
+    color: var(--text);
+  }
+
+  .wordmark .dot { color: var(--gold); }
+
+  .locus {
+    font-family: "Space Mono", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    color: var(--muted);
+  }
+
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-block: 64px;
+  }
+
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    align-self: flex-start;
+    font-family: "Space Mono", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold-soft);
+    border-radius: 999px;
+    padding: 7px 14px;
+    margin-bottom: 34px;
+  }
+
+  .status .pulse {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 0 0 var(--gold-soft);
+    animation: pulse 2.4s ease-out infinite;
+  }
+
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(230, 181, 102, 0.5); }
+    70%  { box-shadow: 0 0 0 10px rgba(230, 181, 102, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(230, 181, 102, 0); }
+  }
+
+  h1 {
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 600;
+    font-size: clamp(2.3rem, 6.6vw, 4.1rem);
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    max-width: 14ch;
+  }
+
+  h1 .accent {
+    color: var(--gold);
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  .lede {
+    margin-top: 26px;
+    font-size: clamp(1rem, 2.3vw, 1.18rem);
+    line-height: 1.6;
+    color: var(--muted);
+    max-width: 46ch;
+  }
+
+  footer {
+    padding-block: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--line);
+    font-family: "Space Mono", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+  }
+
+  footer a {
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--gold-soft);
+    padding-bottom: 2px;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+
+  footer a:hover,
+  footer a:focus-visible { color: var(--gold); border-color: var(--gold); }
+
+  :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+
+  @media (max-width: 540px) {
+    header { padding-top: 30px; }
+    .locus { display: none; }
+    footer { justify-content: flex-start; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    body::before { animation: none; }
+    .status .pulse { animation: none; }
+  }
+</style>
+</head>
+<body>
+  <header>
+    <span class="wordmark">SUYTEX<span class="dot">.</span>ACADEMY</span>
+    <span class="locus">SANTO DOMINGO · RD</span>
+  </header>
+
+  <main>
+    <span class="status"><span class="pulse"></span>Próximamente · 2026</span>
+    <h1>Para profesionales que <span class="accent">construyen</span>, no solo aprenden.</h1>
+    <p class="lede">
+      Una membresía para crear tus propias herramientas y automatizar tu trabajo
+      con inteligencia artificial. Estamos afinando los detalles.
+    </p>
+  </main>
+
+  <footer>
+    <span>© 2026 SUYTEX LLC</span>
+    <a href="mailto:hola@suytex.com">ESCRÍBENOS →</a>
+  </footer>
+</body>
+</html>
