@@ -12,134 +12,45 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://suytex.com" />
 
-<!-- Design System (fuentes + vars + clases base) -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Suytex/suytex-design@main/suytex.css" />
+<!-- Fuentes -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 
 <style>
 /* ============================================================
-   FALLBACK VARS — activas si el CDN no responde
+   VARIABLES
    ============================================================ */
 :root {
-  --su-brand:     #0A0E27;
-  --su-ink:       #060B1A;
-  --su-blue:      #2563EB;
-  --su-highlight: #93C5FD;
-  --su-mist:      #94A3B8;
-  --su-white:     #FFFFFF;
-  --su-gradient:  linear-gradient(135deg, #93C5FD, #2563EB);
-  --su-border:    rgba(255, 255, 255, 0.08);
-  --su-radius:    4px;
+  --bg:         #0A0A0A;
+  --surface:    #111111;
+  --card:       #171717;
+  --card-hover: #1C1C1C;
+  --text:       #EDEDE9;
+  --muted:      #7C7C7A;
+  --border:     rgba(255, 255, 255, 0.07);
+  --gold:       #C8963C;
+  --gold-lt:    #DDA84E;
+  --gold-soft:  rgba(200, 150, 60, 0.13);
+  --pill:       999px;
+  --radius:     12px;
 }
 
 /* ============================================================
-   FALLBACK CLASES BASE — el CDN las define; esto es respaldo
-   ============================================================ */
-.su-title {
-  font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--su-white);
-  line-height: 1.1;
-}
-
-.su-caption {
-  font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.30em;
-  text-transform: uppercase;
-  color: var(--su-highlight);
-}
-
-.su-body {
-  font-family: "Inter", system-ui, sans-serif;
-  font-weight: 300;
-  font-size: 14px;
-  color: var(--su-mist);
-  line-height: 1.65;
-}
-
-.su-gradient-text {
-  background: var(--su-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.su-card {
-  background: var(--su-ink);
-  border: 1px solid var(--su-border);
-  border-radius: var(--su-radius);
-}
-
-.su-rule {
-  border: none;
-  border-top: 1px solid var(--su-border);
-  margin: 0;
-}
-
-.su-icon {
-  stroke: var(--su-blue);
-  stroke-width: 1.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  fill: none;
-  width: 24px;
-  height: 24px;
-  flex-shrink: 0;
-  display: block;
-}
-
-/* ============================================================
-   RESET MÍNIMO
+   RESET
    ============================================================ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 html { scroll-behavior: smooth; }
 
 body {
-  background: var(--su-brand);
-  color: var(--su-white);
+  background: var(--bg);
+  color: var(--text);
   font-family: "Inter", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   min-height: 100dvh;
+  overflow-x: hidden;
 }
-
-/* ============================================================
-   BTN
-   ============================================================ */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  font-family: "Inter", system-ui, sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  text-decoration: none;
-  border-radius: var(--su-radius);
-  padding: 10px 18px;
-  cursor: pointer;
-  transition: opacity 0.18s ease;
-}
-
-.btn:hover { opacity: 0.82; }
-
-.btn-primary {
-  background: var(--su-blue);
-  color: var(--su-white);
-  border: none;
-}
-
-.btn-secondary {
-  background: transparent;
-  border: 1px solid var(--su-blue);
-  color: var(--su-highlight);
-}
-
-.btn-sm { padding: 7px 13px; font-size: 12px; }
 
 /* ============================================================
    NAV
@@ -148,15 +59,17 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: var(--su-brand);
-  border-bottom: 1px solid var(--su-border);
-  padding-inline: 24px;
+  background: rgba(10, 10, 10, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 28px;
 }
 
 .nav-inner {
-  max-width: 1080px;
-  margin-inline: auto;
-  height: 58px;
+  max-width: 1120px;
+  margin: 0 auto;
+  height: 62px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -166,100 +79,180 @@ body {
 .nav-logo {
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 10px;
   text-decoration: none;
   flex-shrink: 0;
 }
 
-.nav-bullet {
-  width: 14px;
-  height: 14px;
+.nav-dot {
+  width: 10px;
+  height: 10px;
   border-radius: 3px;
-  background: var(--su-gradient);
+  background: var(--gold);
   flex-shrink: 0;
 }
 
 .nav-wordmark {
-  font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
+  font-family: "Space Mono", monospace;
   font-weight: 700;
-  font-size: 17px;
-  letter-spacing: 0.18em;
+  font-size: 13px;
+  letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: var(--su-white);
+  color: var(--text);
 }
 
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 32px;
   list-style: none;
   flex: 1;
   justify-content: center;
 }
 
 .nav-links a {
-  font-family: "Inter", system-ui, sans-serif;
   font-size: 11px;
   font-weight: 500;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--su-mist);
+  color: var(--muted);
   text-decoration: none;
-  transition: color 0.18s;
+  transition: color 0.2s;
 }
 
-.nav-links a:hover { color: var(--su-white); }
+.nav-links a:hover { color: var(--text); }
 
 /* ============================================================
-   SECCIONES — layout base
+   BOTONES
    ============================================================ */
-.section {
-  padding-block: 88px;
-  padding-inline: 24px;
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.18s;
+  white-space: nowrap;
 }
 
-.section-ink { background: var(--su-ink); }
+.btn:hover { opacity: 0.82; }
+
+.btn-gold {
+  background: var(--gold);
+  color: #1C0C00;
+  border-radius: var(--pill);
+  padding: 12px 26px;
+  font-size: 15px;
+}
+
+.btn-gold-sm {
+  background: var(--gold);
+  color: #1C0C00;
+  border-radius: var(--pill);
+  padding: 8px 17px;
+  font-size: 12px;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid rgba(200, 150, 60, 0.38);
+  color: var(--gold);
+  border-radius: var(--pill);
+  padding: 12px 26px;
+  font-size: 15px;
+}
+
+/* ============================================================
+   LAYOUT BASE
+   ============================================================ */
+.section {
+  padding: 96px 28px;
+}
+
+.section-alt { background: var(--surface); }
 
 .container {
-  max-width: 1080px;
-  margin-inline: auto;
+  max-width: 1120px;
+  margin: 0 auto;
 }
 
 .container-narrow {
-  max-width: 640px;
-  margin-inline: auto;
+  max-width: 680px;
+  margin: 0 auto;
 }
 
 /* ============================================================
    HERO
    ============================================================ */
 .hero {
+  position: relative;
   text-align: center;
-  padding-block: 100px 88px;
-  padding-inline: 24px;
+  padding: 128px 28px 108px;
+  overflow: hidden;
 }
 
-.hero-caption { margin-bottom: 20px; }
+/* Glow ambiental */
+.hero-glow {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 880px;
+  height: 520px;
+  background: radial-gradient(ellipse at center, var(--gold-soft) 0%, transparent 68%);
+  filter: blur(28px);
+  pointer-events: none;
+  animation: breathe 8s ease-in-out infinite;
+  z-index: 0;
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 0.65; transform: translate(-50%, -50%) scale(1); }
+  50%       { opacity: 1;    transform: translate(-50%, -50%) scale(1.18); }
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-caption {
+  display: inline-block;
+  font-family: "Space Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.30em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 28px;
+}
 
 .hero-title {
-  font-size: clamp(1.8rem, 3.8vw, 2.1rem); /* ~33px */
-  line-height: 1.12;
-  margin-bottom: 22px;
-  max-width: 20ch;
-  margin-inline: auto;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.8rem, 7vw, 5.6rem);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  max-width: 15ch;
+  margin: 0 auto 28px;
 }
 
+.hero-title .accent { color: var(--gold); }
+
 .hero-body {
-  max-width: 430px;
-  margin-inline: auto;
-  margin-bottom: 34px;
-  font-size: 15px;
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.68;
+  max-width: 44ch;
+  margin: 0 auto 44px;
 }
 
 .hero-ctas {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 14px;
   justify-content: center;
 }
 
@@ -267,52 +260,99 @@ body {
    COMUNIDAD
    ============================================================ */
 .comunidad-wrap {
-  max-width: 600px;
-  margin-inline: auto;
+  max-width: 660px;
+  margin: 0 auto;
 }
 
 .comunidad-card {
-  border-left: 2px solid var(--su-blue);
-  border-radius: var(--su-radius);
-  background: var(--su-ink);
-  padding: 28px;
+  border-left: 3px solid var(--gold);
+  background: var(--card);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 32px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  transition: border-left-color 0.2s;
+  gap: 16px;
+  transition: border-color 0.2s;
 }
 
-.comunidad-card:hover {
-  border-left-color: var(--su-highlight);
-}
+.comunidad-card:hover { border-color: var(--gold-lt); }
 
 .comunidad-header {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 
-.comunidad-title { font-size: 16px; }
+.icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--gold-soft);
+  border: 1px solid rgba(200, 150, 60, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.icon-box svg {
+  stroke: var(--gold);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  width: 20px;
+  height: 20px;
+}
+
+.comunidad-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 19px;
+  color: var(--text);
+}
+
+.comunidad-body {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.6;
+}
 
 .cap-pill {
   align-self: flex-start;
-  font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
+  font-family: "Space Mono", monospace;
   font-size: 10px;
-  font-weight: 600;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--su-highlight);
-  border: 1px solid var(--su-border);
-  border-radius: var(--su-radius);
-  padding: 4px 10px;
+  color: var(--gold);
+  border: 1px solid rgba(200, 150, 60, 0.28);
+  border-radius: var(--pill);
+  padding: 4px 13px;
 }
 
 /* ============================================================
    LOS 4 MUNDOS
    ============================================================ */
-.mundos-header {
+.section-label {
+  font-family: "Space Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.30em;
+  text-transform: uppercase;
+  color: var(--gold);
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 14px;
+}
+
+.section-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 800;
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  letter-spacing: -0.025em;
+  color: var(--text);
+  text-align: center;
+  line-height: 1.08;
+  margin-bottom: 56px;
 }
 
 .mundos-grid {
@@ -322,67 +362,67 @@ body {
 }
 
 .mundo-card {
-  border-radius: var(--su-radius);
-  background: var(--su-ink);
-  border: 1px solid var(--su-border);
-  padding: 20px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  transition: border-color 0.2s;
+  gap: 11px;
+  transition: border-color 0.22s, background 0.22s;
 }
 
 .mundo-card:hover {
-  border-color: rgba(147, 197, 253, 0.32);
+  border-color: rgba(200, 150, 60, 0.28);
+  background: var(--card-hover);
 }
 
 .mundo-name {
-  font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
-  font-size: 15px;
+  font-family: "Space Grotesk", sans-serif;
   font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--su-white);
+  font-size: 20px;
+  color: var(--text);
+  letter-spacing: -0.01em;
 }
 
 .mundo-course {
-  font-family: "Inter", system-ui, sans-serif;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.80);
+  color: rgba(237, 237, 233, 0.72);
 }
 
 .mundo-meta {
-  font-family: "Inter", system-ui, sans-serif;
+  font-family: "Space Mono", monospace;
   font-size: 11px;
-  font-weight: 300;
-  color: var(--su-mist);
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.mundo-rule {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2px 0;
 }
 
 .mundo-service {
-  font-family: "Inter", system-ui, sans-serif;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 300;
-  color: var(--su-mist);
+  color: var(--muted);
 }
 
 .mundo-link {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  font-family: "Inter", system-ui, sans-serif;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  color: var(--su-highlight);
+  gap: 5px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold);
   text-decoration: none;
   margin-top: auto;
   transition: color 0.18s;
 }
 
-.mundo-link:hover { color: var(--su-white); }
-
-.mundo-rule { margin-block: 2px; }
+.mundo-link:hover { color: var(--gold-lt); }
 
 /* ============================================================
    SOBRE FRANCISCO
@@ -390,26 +430,28 @@ body {
 .sobre-card {
   display: flex;
   align-items: flex-start;
-  gap: 20px;
-  max-width: 640px;
-  margin-inline: auto;
-  padding: 28px;
+  gap: 24px;
+  max-width: 680px;
+  margin: 0 auto;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px;
 }
 
 .avatar-tile {
-  width: 50px;
-  height: 50px;
-  border-radius: var(--su-radius);
-  background: var(--su-gradient);
+  width: 54px;
+  height: 54px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--gold-lt), var(--gold));
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
-  font-weight: 600;
-  font-size: 15px;
-  color: var(--su-brand);
-  -webkit-font-smoothing: antialiased;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  color: #1C0C00;
 }
 
 .sobre-text {
@@ -418,29 +460,52 @@ body {
   gap: 10px;
 }
 
-.sobre-name { font-size: 16px; }
+.sobre-name {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 19px;
+  color: var(--text);
+}
+
+.sobre-body {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.65;
+}
 
 /* ============================================================
    CTA FINAL
    ============================================================ */
 .cta-final {
   text-align: center;
-  padding-block: 88px;
-  padding-inline: 24px;
-  border-top: 1px solid var(--su-border);
+  padding: 104px 28px;
+  border-top: 1px solid var(--border);
 }
 
 .cta-title {
-  font-size: clamp(1.3rem, 3vw, 1.6rem); /* ~22px */
-  margin-bottom: 12px;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  letter-spacing: -0.025em;
+  color: var(--text);
+  line-height: 1.08;
+  margin-bottom: 16px;
 }
 
-.cta-body { margin-bottom: 28px; }
+.cta-title .accent { color: var(--gold); }
+
+.cta-body {
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--muted);
+  margin-bottom: 38px;
+}
 
 .cta-ctas {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 14px;
   justify-content: center;
 }
 
@@ -448,13 +513,14 @@ body {
    FOOTER
    ============================================================ */
 footer {
-  border-top: 1px solid var(--su-border);
-  padding: 28px 24px;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  padding: 28px 28px;
 }
 
 .footer-inner {
-  max-width: 1080px;
-  margin-inline: auto;
+  max-width: 1120px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -463,20 +529,20 @@ footer {
 }
 
 .footer-wordmark {
-  font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
+  font-family: "Space Mono", monospace;
   font-weight: 700;
-  font-size: 14px;
-  letter-spacing: 0.22em;
+  font-size: 13px;
+  letter-spacing: 0.30em;
   text-transform: uppercase;
+  color: var(--gold);
 }
 
 .footer-worlds {
-  font-family: "Inter", system-ui, sans-serif;
-  font-size: 11px;
-  font-weight: 400;
-  letter-spacing: 0.14em;
+  font-family: "Space Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--su-mist);
+  color: var(--muted);
 }
 
 /* ============================================================
@@ -484,40 +550,31 @@ footer {
    ============================================================ */
 @media (max-width: 640px) {
   .nav-links { display: none; }
-
-  .hero { padding-block: 72px 64px; }
-  .hero-title { font-size: 1.7rem; }
-
-  .section { padding-block: 60px; }
-
+  .hero { padding: 88px 24px 72px; }
+  .section { padding: 64px 24px; }
   .mundos-grid { grid-template-columns: 1fr; }
-
   .sobre-card { flex-direction: column; }
-
   .footer-inner { justify-content: flex-start; }
+  .btn-gold, .btn-outline { padding: 12px 22px; font-size: 14px; }
 }
 
 @media (max-width: 400px) {
-  .nav-inner { height: 52px; }
-  .nav-wordmark { font-size: 15px; }
-  .hero-title { font-size: 1.5rem; }
+  .nav-inner { height: 54px; }
+  .hero-title { letter-spacing: -0.025em; }
 }
 
 /* ============================================================
    ACCESSIBILITY
    ============================================================ */
 :focus-visible {
-  outline: 2px solid var(--su-blue);
+  outline: 2px solid var(--gold);
   outline-offset: 3px;
-  border-radius: var(--su-radius);
+  border-radius: 4px;
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-  }
+  .hero-glow { animation: none; }
 }
 </style>
 </head>
@@ -530,7 +587,7 @@ footer {
   <div class="nav-inner">
 
     <a href="#" class="nav-logo" aria-label="Suytex Academy — inicio">
-      <span class="nav-bullet" aria-hidden="true"></span>
+      <span class="nav-dot" aria-hidden="true"></span>
       <span class="nav-wordmark">Suytex</span>
     </a>
 
@@ -541,19 +598,11 @@ footer {
     </ul>
 
     <a href="https://wa.me/18096399999"
-       class="btn btn-primary btn-sm"
+       class="btn btn-gold-sm"
        target="_blank"
        rel="noopener noreferrer"
        aria-label="Contáctanos por WhatsApp">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
-           stroke="currentColor" stroke-width="1.5"
-           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7
-                 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8
-                 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5
-                 a8.48 8.48 0 0 1 8 8v.5z"/>
-      </svg>
-      WhatsApp
+      WhatsApp →
     </a>
 
   </div>
@@ -564,21 +613,25 @@ footer {
      HERO
      ============================================================ -->
 <section class="hero" aria-labelledby="hero-heading">
-  <p class="su-caption hero-caption">Academia para quienes construyen</p>
+  <div class="hero-glow" aria-hidden="true"></div>
 
-  <h1 id="hero-heading" class="su-title hero-title">
-    Para quienes construyen,<br>
-    <span class="su-gradient-text">no solo aprenden.</span>
-  </h1>
+  <div class="hero-inner">
+    <span class="hero-caption">Academia para quienes construyen</span>
 
-  <p class="su-body hero-body">
-    AI, trading, crypto y portafolios. Cuatro mundos, una academia
-    para profesionales hispanos que van en serio.
-  </p>
+    <h1 id="hero-heading" class="hero-title">
+      Para quienes<br>construyen, no solo<br>
+      <span class="accent">aprenden.</span>
+    </h1>
 
-  <div class="hero-ctas">
-    <a href="#mundos" class="btn btn-primary">Explorar entrenamientos</a>
-    <a href="#comunidad" class="btn btn-secondary">Unirme a la comunidad</a>
+    <p class="hero-body">
+      AI, trading, crypto y portafolios. Cuatro mundos,
+      una academia para profesionales hispanos que van en serio.
+    </p>
+
+    <div class="hero-ctas">
+      <a href="#mundos" class="btn btn-gold">Explorar entrenamientos →</a>
+      <a href="#comunidad" class="btn btn-outline">Unirme a la comunidad</a>
+    </div>
   </div>
 </section>
 
@@ -586,23 +639,24 @@ footer {
 <!-- ============================================================
      COMUNIDAD
      ============================================================ -->
-<section id="comunidad" class="section section-ink" aria-labelledby="comunidad-heading">
+<section id="comunidad" class="section section-alt" aria-labelledby="comunidad-heading">
   <div class="container">
     <div class="comunidad-wrap">
       <div class="comunidad-card">
 
         <div class="comunidad-header">
-          <!-- Icon: users -->
-          <svg class="su-icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-            <circle cx="9" cy="7" r="4"/>
-            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-          </svg>
-          <h2 id="comunidad-heading" class="su-title comunidad-title">Comunidad Suytex</h2>
+          <div class="icon-box">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <h2 id="comunidad-heading" class="comunidad-title">Comunidad Suytex</h2>
         </div>
 
-        <p class="su-body">Acceso · mentoría · red — transversal a los 4 mundos.</p>
+        <p class="comunidad-body">Acceso · mentoría · red — transversal a los 4 mundos.</p>
 
         <span class="cap-pill">Membership</span>
 
@@ -618,95 +672,102 @@ footer {
 <section id="mundos" class="section" aria-labelledby="mundos-heading">
   <div class="container">
 
-    <div class="mundos-header">
-      <p class="su-caption" id="mundos-heading">Los 4 mundos</p>
-    </div>
+    <p class="section-label">Los 4 mundos</p>
+    <h2 id="mundos-heading" class="section-title">Elige tu mundo</h2>
 
     <div class="mundos-grid">
 
       <!-- AI -->
       <article class="mundo-card">
-        <!-- Icon: cpu -->
-        <svg class="su-icon" viewBox="0 0 24 24" aria-hidden="true">
-          <rect x="4" y="4" width="16" height="16" rx="2"/>
-          <rect x="8" y="8" width="8" height="8"/>
-          <line x1="4" y1="9" x2="2" y2="9"/>
-          <line x1="4" y1="15" x2="2" y2="15"/>
-          <line x1="22" y1="9" x2="20" y2="9"/>
-          <line x1="22" y1="15" x2="20" y2="15"/>
-          <line x1="9" y1="4" x2="9" y2="2"/>
-          <line x1="15" y1="4" x2="15" y2="2"/>
-          <line x1="9" y1="22" x2="9" y2="20"/>
-          <line x1="15" y1="22" x2="15" y2="20"/>
-        </svg>
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24" aria-hidden="true"
+               stroke="var(--gold)" stroke-width="1.5"
+               stroke-linecap="round" stroke-linejoin="round" fill="none"
+               width="20" height="20">
+            <rect x="4" y="4" width="16" height="16" rx="2"/>
+            <rect x="8" y="8" width="8" height="8"/>
+            <line x1="4" y1="9" x2="2" y2="9"/>
+            <line x1="4" y1="15" x2="2" y2="15"/>
+            <line x1="22" y1="9" x2="20" y2="9"/>
+            <line x1="22" y1="15" x2="20" y2="15"/>
+            <line x1="9" y1="4" x2="9" y2="2"/>
+            <line x1="15" y1="4" x2="15" y2="2"/>
+            <line x1="9" y1="22" x2="9" y2="20"/>
+            <line x1="15" y1="22" x2="15" y2="20"/>
+          </svg>
+        </div>
         <p class="mundo-name">AI</p>
         <p class="mundo-course">AI Productivity Experience</p>
         <p class="mundo-meta">5 días · 21 herramientas</p>
-        <hr class="su-rule mundo-rule" />
+        <hr class="mundo-rule" />
         <p class="mundo-service">+ Automatización a medida</p>
-        <a href="https://ai.suytex.com"
-           class="mundo-link"
-           target="_blank"
-           rel="noopener noreferrer">Entrar →</a>
+        <a href="https://ai.suytex.com" class="mundo-link"
+           target="_blank" rel="noopener noreferrer">Entrar →</a>
       </article>
 
       <!-- Trading -->
       <article class="mundo-card">
-        <!-- Icon: trending-up -->
-        <svg class="su-icon" viewBox="0 0 24 24" aria-hidden="true">
-          <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
-          <polyline points="17 6 23 6 23 12"/>
-        </svg>
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24" aria-hidden="true"
+               stroke="var(--gold)" stroke-width="1.5"
+               stroke-linecap="round" stroke-linejoin="round" fill="none"
+               width="20" height="20">
+            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+            <polyline points="17 6 23 6 23 12"/>
+          </svg>
+        </div>
         <p class="mundo-name">Trading</p>
         <p class="mundo-course">Suytex Trading Experience</p>
         <p class="mundo-meta">4 días · $497</p>
-        <hr class="su-rule mundo-rule" />
+        <hr class="mundo-rule" />
         <p class="mundo-service">+ Mentoría 1:1</p>
-        <a href="https://trading.suytex.com"
-           class="mundo-link"
-           target="_blank"
-           rel="noopener noreferrer">Entrar →</a>
+        <a href="https://trading.suytex.com" class="mundo-link"
+           target="_blank" rel="noopener noreferrer">Entrar →</a>
       </article>
 
       <!-- Crypto -->
       <article class="mundo-card">
-        <!-- Icon: bitcoin (circle + B strokes) -->
-        <svg class="su-icon" viewBox="0 0 24 24" aria-hidden="true">
-          <circle cx="12" cy="12" r="10"/>
-          <path d="M9.5 8H14a2.5 2.5 0 0 1 0 5H9.5V8z"/>
-          <path d="M9.5 13H14.5a2.5 2.5 0 0 1 0 5H9.5v-5z"/>
-          <line x1="10.5" y1="8" x2="10.5" y2="6.5"/>
-          <line x1="13" y1="8" x2="13" y2="6.5"/>
-          <line x1="10.5" y1="18" x2="10.5" y2="19.5"/>
-          <line x1="13" y1="18" x2="13" y2="19.5"/>
-        </svg>
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24" aria-hidden="true"
+               stroke="var(--gold)" stroke-width="1.5"
+               stroke-linecap="round" stroke-linejoin="round" fill="none"
+               width="20" height="20">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M9.5 8H14a2.5 2.5 0 0 1 0 5H9.5V8z"/>
+            <path d="M9.5 13H14.5a2.5 2.5 0 0 1 0 5H9.5v-5z"/>
+            <line x1="10.5" y1="8" x2="10.5" y2="6.5"/>
+            <line x1="13" y1="8" x2="13" y2="6.5"/>
+            <line x1="10.5" y1="18" x2="10.5" y2="19.5"/>
+            <line x1="13" y1="18" x2="13" y2="19.5"/>
+          </svg>
+        </div>
         <p class="mundo-name">Crypto</p>
         <p class="mundo-course">Tu primer Bitcoin</p>
         <p class="mundo-meta">5 días · $497</p>
-        <hr class="su-rule mundo-rule" />
+        <hr class="mundo-rule" />
         <p class="mundo-service">+ Swing y señales</p>
-        <a href="https://crypto.suytex.com"
-           class="mundo-link"
-           target="_blank"
-           rel="noopener noreferrer">Entrar →</a>
+        <a href="https://crypto.suytex.com" class="mundo-link"
+           target="_blank" rel="noopener noreferrer">Entrar →</a>
       </article>
 
       <!-- Portafolios -->
       <article class="mundo-card">
-        <!-- Icon: pie-chart -->
-        <svg class="su-icon" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M21.21 15.89A10 10 0 1 1 8 2.83"/>
-          <path d="M22 12A10 10 0 0 0 12 2v10z"/>
-        </svg>
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24" aria-hidden="true"
+               stroke="var(--gold)" stroke-width="1.5"
+               stroke-linecap="round" stroke-linejoin="round" fill="none"
+               width="20" height="20">
+            <path d="M21.21 15.89A10 10 0 1 1 8 2.83"/>
+            <path d="M22 12A10 10 0 0 0 12 2v10z"/>
+          </svg>
+        </div>
         <p class="mundo-name">Portafolios</p>
         <p class="mundo-course">Portafolios Experience</p>
         <p class="mundo-meta">En vivo</p>
-        <hr class="su-rule mundo-rule" />
+        <hr class="mundo-rule" />
         <p class="mundo-service">+ Manejo de portafolios</p>
-        <a href="https://portafolios.suytex.com"
-           class="mundo-link"
-           target="_blank"
-           rel="noopener noreferrer">Entrar →</a>
+        <a href="https://portafolios.suytex.com" class="mundo-link"
+           target="_blank" rel="noopener noreferrer">Entrar →</a>
       </article>
 
     </div>
@@ -717,15 +778,15 @@ footer {
 <!-- ============================================================
      SOBRE FRANCISCO
      ============================================================ -->
-<section id="sobre" class="section section-ink" aria-labelledby="sobre-heading">
+<section id="sobre" class="section section-alt" aria-labelledby="sobre-heading">
   <div class="container">
-    <div class="su-card sobre-card">
+    <div class="sobre-card">
 
       <div class="avatar-tile" aria-hidden="true">FJ</div>
 
       <div class="sobre-text">
-        <h2 id="sobre-heading" class="su-title sobre-name">Francisco</h2>
-        <p class="su-body">
+        <h2 id="sobre-heading" class="sobre-name">Francisco</h2>
+        <p class="sobre-body">
           Trader, educador y 15+ años en infraestructura IT.
           El que diseña, opera y enseña — no teoría de salón.
         </p>
@@ -742,27 +803,19 @@ footer {
 <section class="cta-final" aria-labelledby="cta-heading">
   <div class="container-narrow">
 
-    <h2 id="cta-heading" class="su-title cta-title">
-      ¿Listo para <span class="su-gradient-text">construir?</span>
+    <h2 id="cta-heading" class="cta-title">
+      ¿Listo para <span class="accent">construir?</span>
     </h2>
 
-    <p class="su-body cta-body">Hablemos por WhatsApp y elige tu mundo.</p>
+    <p class="cta-body">Hablemos por WhatsApp y elige tu mundo.</p>
 
     <div class="cta-ctas">
       <a href="https://wa.me/18096399999"
-         class="btn btn-primary"
+         class="btn btn-gold"
          target="_blank"
          rel="noopener noreferrer"
          aria-label="Contáctanos por WhatsApp al 809-639-9999">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
-             stroke="currentColor" stroke-width="1.5"
-             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7
-                   8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8
-                   8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5
-                   a8.48 8.48 0 0 1 8 8v.5z"/>
-        </svg>
-        809-639-9999
+        809-639-9999 →
       </a>
     </div>
 
@@ -775,7 +828,7 @@ footer {
      ============================================================ -->
 <footer role="contentinfo">
   <div class="footer-inner">
-    <span class="footer-wordmark su-gradient-text">Suytex</span>
+    <span class="footer-wordmark">Suytex</span>
     <span class="footer-worlds">ai · trading · crypto · portafolios</span>
   </div>
 </footer>
