@@ -669,6 +669,47 @@ footer {
 .mundos-grid [data-reveal]:nth-child(4) { transition-delay: 0.24s; }
 
 /* ============================================================
+   BOTÓN FLOTANTE WHATSAPP
+   ============================================================ */
+.wa-fab {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 200;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #25D366;
+  color: #FFFFFF;
+  padding: 13px 19px;
+  border-radius: var(--pill);
+  font-family: "Inter", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.55);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: wa-pulse 2.8s ease-out infinite;
+}
+
+.wa-fab:hover { transform: translateY(-2px); }
+
+.wa-fab-icon { width: 22px; height: 22px; flex-shrink: 0; }
+
+.wa-fab-label { white-space: nowrap; }
+
+@keyframes wa-pulse {
+  0%   { box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.55), 0 0 0 0 rgba(37, 211, 102, 0.45); }
+  70%  { box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.55), 0 0 0 16px rgba(37, 211, 102, 0); }
+  100% { box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.55), 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+@media (max-width: 480px) {
+  .wa-fab { right: 16px; bottom: 16px; padding: 14px; }
+  .wa-fab-label { display: none; }
+}
+
+/* ============================================================
    RESPONSIVE
    ============================================================ */
 @media (max-width: 640px) {
@@ -701,7 +742,8 @@ footer {
   .hero-glow::before,
   .hero-glow::after,
   .hero-title .accent,
-  .cta-title .accent { animation: none; }
+  .cta-title .accent,
+  .wa-fab { animation: none; }
   [data-reveal] {
     opacity: 1;
     transform: none;
@@ -747,7 +789,7 @@ footer {
 <!-- ============================================================
      HERO
      ============================================================ -->
-<section class="hero" aria-labelledby="hero-heading">
+<section id="inicio" class="hero" aria-labelledby="hero-heading">
   <div class="hero-glow" aria-hidden="true"></div>
 
   <div class="hero-inner">
@@ -939,7 +981,7 @@ footer {
 <!-- ============================================================
      CTA FINAL
      ============================================================ -->
-<section class="cta-final" aria-labelledby="cta-heading">
+<section id="empezar" class="cta-final" aria-labelledby="cta-heading">
   <div class="container-narrow">
 
     <h2 id="cta-heading" class="cta-title" data-reveal>
@@ -972,6 +1014,19 @@ footer {
   </div>
 </footer>
 
+<!-- ============================================================
+     BOTÓN FLOTANTE WHATSAPP — mensaje dinámico por sección
+     ============================================================ -->
+<a id="waFab" class="wa-fab"
+   href="https://wa.me/18094089999"
+   target="_blank" rel="noopener noreferrer"
+   aria-label="Escríbenos por WhatsApp">
+  <svg class="wa-fab-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M12 2a10 10 0 0 0-8.6 15.05L2 22l5.05-1.32A10 10 0 1 0 12 2zm0 2a8 8 0 0 1 6.78 12.23l-.24.38.78 2.85-2.92-.77-.37.22A8 8 0 1 1 12 4zm-2.85 4.2c-.15 0-.4.06-.6.28-.21.22-.8.78-.8 1.9 0 1.12.82 2.2.93 2.36.12.15 1.6 2.55 3.94 3.48 1.95.77 2.35.62 2.77.58.42-.04 1.37-.56 1.56-1.1.2-.54.2-1 .14-1.1-.06-.1-.22-.16-.46-.28-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.93-1.19-.71-.64-1.19-1.42-1.33-1.66-.14-.24-.01-.37.11-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.4-.4-.54-.41h-.46z"/>
+  </svg>
+  <span class="wa-fab-label" id="waFabLabel">Escríbenos</span>
+</a>
+
 <script>
 (function () {
   var reduce = window.matchMedia &&
@@ -1001,6 +1056,46 @@ footer {
         card.style.setProperty("--mx", (ev.clientX - r.left) + "px");
         card.style.setProperty("--my", (ev.clientY - r.top) + "px");
       });
+    });
+  }
+
+  /* --- WhatsApp flotante: mensaje dinámico según la sección visible --- */
+  var fab = document.getElementById("waFab");
+  var fabLabel = document.getElementById("waFabLabel");
+  var WA = "https://wa.me/18094089999";
+  var MESSAGES = {
+    inicio:    { label: "Escríbenos",            text: "Hola, quiero saber más sobre Suytex Academy." },
+    comunidad: { label: "Unirme a la comunidad", text: "Hola, me interesa la Comunidad Suytex. ¿Cómo entro?" },
+    mundos:    { label: "Quiero info",           text: "Hola, quiero información de los entrenamientos de Suytex." },
+    sobre:     { label: "Hablar con Francisco",  text: "Hola Francisco, quiero hablar sobre los entrenamientos." },
+    empezar:   { label: "Empezar ahora",         text: "Hola, estoy listo para empezar. ¿Cómo me uno?" }
+  };
+
+  function setFab(key) {
+    var m = MESSAGES[key] || MESSAGES.inicio;
+    if (!fab) return;
+    fab.href = WA + "?text=" + encodeURIComponent(m.text);
+    if (fabLabel) fabLabel.textContent = m.label;
+  }
+
+  setFab("inicio");
+
+  if (fab && "IntersectionObserver" in window) {
+    var ratios = {};
+    var secObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        ratios[e.target.id] = e.isIntersecting ? e.intersectionRatio : 0;
+      });
+      var top = null, max = 0;
+      Object.keys(ratios).forEach(function (id) {
+        if (ratios[id] > max) { max = ratios[id]; top = id; }
+      });
+      if (top) setFab(top);
+    }, { threshold: [0, 0.25, 0.5, 0.75, 1] });
+
+    ["inicio", "comunidad", "mundos", "sobre", "empezar"].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) secObserver.observe(el);
     });
   }
 })();
