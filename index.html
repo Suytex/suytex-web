@@ -3,235 +3,782 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Suytex Academy — Próximamente</title>
-<meta name="description" content="Suytex Academy: una membresía para profesionales que quieren construir sus propias herramientas y automatizar su trabajo con inteligencia artificial." />
+<title>Suytex Academy — AI · Trading · Crypto · Portafolios</title>
+<meta name="description" content="Academia para profesionales hispanos que construyen con AI, trading, crypto y portafolios. Entrenamientos, comunidad y mentoría." />
 
 <!-- Open Graph -->
-<meta property="og:title" content="Suytex Academy — Próximamente" />
-<meta property="og:description" content="Para profesionales que construyen, no solo aprenden." />
+<meta property="og:title" content="Suytex Academy — Para quienes construyen" />
+<meta property="og:description" content="AI, trading, crypto y portafolios. Una academia para profesionales hispanos que van en serio." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://suytex.com" />
 
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<!-- Design System (fuentes + vars + clases base) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Suytex/suytex-design@main/suytex.css" />
 
 <style>
-  :root {
-    --ink:        #0A0C12;
-    --ink-2:      #0E111A;
-    --text:       #ECEEF3;
-    --muted:      #7E8699;
-    --line:       rgba(255, 255, 255, 0.07);
-    --gold:       #E6B566;
-    --gold-soft:  rgba(230, 181, 102, 0.16);
-    --maxw:       760px;
+/* ============================================================
+   FALLBACK VARS — activas si el CDN no responde
+   ============================================================ */
+:root {
+  --su-brand:     #0A0E27;
+  --su-ink:       #060B1A;
+  --su-blue:      #2563EB;
+  --su-highlight: #93C5FD;
+  --su-mist:      #94A3B8;
+  --su-white:     #FFFFFF;
+  --su-gradient:  linear-gradient(135deg, #93C5FD, #2563EB);
+  --su-border:    rgba(255, 255, 255, 0.08);
+  --su-radius:    4px;
+}
+
+/* ============================================================
+   FALLBACK CLASES BASE — el CDN las define; esto es respaldo
+   ============================================================ */
+.su-title {
+  font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--su-white);
+  line-height: 1.1;
+}
+
+.su-caption {
+  font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.30em;
+  text-transform: uppercase;
+  color: var(--su-highlight);
+}
+
+.su-body {
+  font-family: "Inter", system-ui, sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  color: var(--su-mist);
+  line-height: 1.65;
+}
+
+.su-gradient-text {
+  background: var(--su-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.su-card {
+  background: var(--su-ink);
+  border: 1px solid var(--su-border);
+  border-radius: var(--su-radius);
+}
+
+.su-rule {
+  border: none;
+  border-top: 1px solid var(--su-border);
+  margin: 0;
+}
+
+.su-icon {
+  stroke: var(--su-blue);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  display: block;
+}
+
+/* ============================================================
+   RESET MÍNIMO
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--su-brand);
+  color: var(--su-white);
+  font-family: "Inter", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  min-height: 100dvh;
+}
+
+/* ============================================================
+   BTN
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  border-radius: var(--su-radius);
+  padding: 10px 18px;
+  cursor: pointer;
+  transition: opacity 0.18s ease;
+}
+
+.btn:hover { opacity: 0.82; }
+
+.btn-primary {
+  background: var(--su-blue);
+  color: var(--su-white);
+  border: none;
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--su-blue);
+  color: var(--su-highlight);
+}
+
+.btn-sm { padding: 7px 13px; font-size: 12px; }
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--su-brand);
+  border-bottom: 1px solid var(--su-border);
+  padding-inline: 24px;
+}
+
+.nav-inner {
+  max-width: 1080px;
+  margin-inline: auto;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.nav-bullet {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  background: var(--su-gradient);
+  flex-shrink: 0;
+}
+
+.nav-wordmark {
+  font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--su-white);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
+  flex: 1;
+  justify-content: center;
+}
+
+.nav-links a {
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--su-mist);
+  text-decoration: none;
+  transition: color 0.18s;
+}
+
+.nav-links a:hover { color: var(--su-white); }
+
+/* ============================================================
+   SECCIONES — layout base
+   ============================================================ */
+.section {
+  padding-block: 88px;
+  padding-inline: 24px;
+}
+
+.section-ink { background: var(--su-ink); }
+
+.container {
+  max-width: 1080px;
+  margin-inline: auto;
+}
+
+.container-narrow {
+  max-width: 640px;
+  margin-inline: auto;
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  text-align: center;
+  padding-block: 100px 88px;
+  padding-inline: 24px;
+}
+
+.hero-caption { margin-bottom: 20px; }
+
+.hero-title {
+  font-size: clamp(1.8rem, 3.8vw, 2.1rem); /* ~33px */
+  line-height: 1.12;
+  margin-bottom: 22px;
+  max-width: 20ch;
+  margin-inline: auto;
+}
+
+.hero-body {
+  max-width: 430px;
+  margin-inline: auto;
+  margin-bottom: 34px;
+  font-size: 15px;
+}
+
+.hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+/* ============================================================
+   COMUNIDAD
+   ============================================================ */
+.comunidad-wrap {
+  max-width: 600px;
+  margin-inline: auto;
+}
+
+.comunidad-card {
+  border-left: 2px solid var(--su-blue);
+  border-radius: var(--su-radius);
+  background: var(--su-ink);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: border-left-color 0.2s;
+}
+
+.comunidad-card:hover {
+  border-left-color: var(--su-highlight);
+}
+
+.comunidad-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.comunidad-title { font-size: 16px; }
+
+.cap-pill {
+  align-self: flex-start;
+  font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--su-highlight);
+  border: 1px solid var(--su-border);
+  border-radius: var(--su-radius);
+  padding: 4px 10px;
+}
+
+/* ============================================================
+   LOS 4 MUNDOS
+   ============================================================ */
+.mundos-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.mundos-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.mundo-card {
+  border-radius: var(--su-radius);
+  background: var(--su-ink);
+  border: 1px solid var(--su-border);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: border-color 0.2s;
+}
+
+.mundo-card:hover {
+  border-color: rgba(147, 197, 253, 0.32);
+}
+
+.mundo-name {
+  font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--su-white);
+}
+
+.mundo-course {
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.80);
+}
+
+.mundo-meta {
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--su-mist);
+}
+
+.mundo-service {
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--su-mist);
+}
+
+.mundo-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--su-highlight);
+  text-decoration: none;
+  margin-top: auto;
+  transition: color 0.18s;
+}
+
+.mundo-link:hover { color: var(--su-white); }
+
+.mundo-rule { margin-block: 2px; }
+
+/* ============================================================
+   SOBRE FRANCISCO
+   ============================================================ */
+.sobre-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  max-width: 640px;
+  margin-inline: auto;
+  padding: 28px;
+}
+
+.avatar-tile {
+  width: 50px;
+  height: 50px;
+  border-radius: var(--su-radius);
+  background: var(--su-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--su-brand);
+  -webkit-font-smoothing: antialiased;
+}
+
+.sobre-text {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sobre-name { font-size: 16px; }
+
+/* ============================================================
+   CTA FINAL
+   ============================================================ */
+.cta-final {
+  text-align: center;
+  padding-block: 88px;
+  padding-inline: 24px;
+  border-top: 1px solid var(--su-border);
+}
+
+.cta-title {
+  font-size: clamp(1.3rem, 3vw, 1.6rem); /* ~22px */
+  margin-bottom: 12px;
+}
+
+.cta-body { margin-bottom: 28px; }
+
+.cta-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  border-top: 1px solid var(--su-border);
+  padding: 28px 24px;
+}
+
+.footer-inner {
+  max-width: 1080px;
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer-wordmark {
+  font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.footer-worlds {
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--su-mist);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+
+  .hero { padding-block: 72px 64px; }
+  .hero-title { font-size: 1.7rem; }
+
+  .section { padding-block: 60px; }
+
+  .mundos-grid { grid-template-columns: 1fr; }
+
+  .sobre-card { flex-direction: column; }
+
+  .footer-inner { justify-content: flex-start; }
+}
+
+@media (max-width: 400px) {
+  .nav-inner { height: 52px; }
+  .nav-wordmark { font-size: 15px; }
+  .hero-title { font-size: 1.5rem; }
+}
+
+/* ============================================================
+   ACCESSIBILITY
+   ============================================================ */
+:focus-visible {
+  outline: 2px solid var(--su-blue);
+  outline-offset: 3px;
+  border-radius: var(--su-radius);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html, body { height: 100%; }
-
-  body {
-    background: var(--ink);
-    color: var(--text);
-    font-family: "Inter", system-ui, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    min-height: 100dvh;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    overflow-x: hidden;
-  }
-
-  /* Signature: warm ambient glow that breathes behind the headline */
-  body::before {
-    content: "";
-    position: fixed;
-    top: 38%;
-    left: 50%;
-    width: 90vw;
-    max-width: 900px;
-    aspect-ratio: 1;
-    transform: translate(-50%, -50%);
-    background: radial-gradient(circle, var(--gold-soft) 0%, transparent 62%);
-    filter: blur(8px);
-    z-index: 0;
-    pointer-events: none;
-    animation: breathe 9s ease-in-out infinite;
-  }
-
-  /* Signature: hairline baseline grid, barely there */
-  body::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background-image: linear-gradient(var(--line) 1px, transparent 1px);
-    background-size: 100% 88px;
-    mask-image: linear-gradient(180deg, transparent, #000 30%, #000 70%, transparent);
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  @keyframes breathe {
-    0%, 100% { opacity: 0.75; transform: translate(-50%, -50%) scale(1); }
-    50%      { opacity: 1;    transform: translate(-50%, -50%) scale(1.08); }
-  }
-
-  /* Layout */
-  header, main, footer {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    max-width: var(--maxw);
-    margin-inline: auto;
-    padding-inline: 28px;
-  }
-
-  header {
-    padding-top: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .wordmark {
-    font-family: "Space Mono", monospace;
-    font-weight: 700;
-    font-size: 0.82rem;
-    letter-spacing: 0.34em;
-    color: var(--text);
-  }
-
-  .wordmark .dot { color: var(--gold); }
-
-  .locus {
-    font-family: "Space Mono", monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.18em;
-    color: var(--muted);
-  }
-
-  main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-block: 64px;
-  }
-
-  .status {
-    display: inline-flex;
-    align-items: center;
-    gap: 9px;
-    align-self: flex-start;
-    font-family: "Space Mono", monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--gold);
-    border: 1px solid var(--gold-soft);
-    border-radius: 999px;
-    padding: 7px 14px;
-    margin-bottom: 34px;
-  }
-
-  .status .pulse {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--gold);
-    box-shadow: 0 0 0 0 var(--gold-soft);
-    animation: pulse 2.4s ease-out infinite;
-  }
-
-  @keyframes pulse {
-    0%   { box-shadow: 0 0 0 0 rgba(230, 181, 102, 0.5); }
-    70%  { box-shadow: 0 0 0 10px rgba(230, 181, 102, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(230, 181, 102, 0); }
-  }
-
-  h1 {
-    font-family: "Space Grotesk", sans-serif;
-    font-weight: 600;
-    font-size: clamp(2.3rem, 6.6vw, 4.1rem);
-    line-height: 1.04;
-    letter-spacing: -0.02em;
-    max-width: 14ch;
-  }
-
-  h1 .accent {
-    color: var(--gold);
-    font-style: italic;
-    font-weight: 500;
-  }
-
-  .lede {
-    margin-top: 26px;
-    font-size: clamp(1rem, 2.3vw, 1.18rem);
-    line-height: 1.6;
-    color: var(--muted);
-    max-width: 46ch;
-  }
-
-  footer {
-    padding-block: 34px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    flex-wrap: wrap;
-    border-top: 1px solid var(--line);
-    font-family: "Space Mono", monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.12em;
-    color: var(--muted);
-  }
-
-  footer a {
-    color: var(--text);
-    text-decoration: none;
-    border-bottom: 1px solid var(--gold-soft);
-    padding-bottom: 2px;
-    transition: border-color 0.2s ease, color 0.2s ease;
-  }
-
-  footer a:hover,
-  footer a:focus-visible { color: var(--gold); border-color: var(--gold); }
-
-  :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
-
-  @media (max-width: 540px) {
-    header { padding-top: 30px; }
-    .locus { display: none; }
-    footer { justify-content: flex-start; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    body::before { animation: none; }
-    .status .pulse { animation: none; }
-  }
+}
 </style>
 </head>
 <body>
-  <header>
-    <span class="wordmark">SUYTEX<span class="dot">.</span>ACADEMY</span>
-    <span class="locus">SANTO DOMINGO · RD</span>
-  </header>
 
-  <main>
-    <span class="status"><span class="pulse"></span>Próximamente · 2026</span>
-    <h1>Para profesionales que <span class="accent">construyen</span>, no solo aprenden.</h1>
-    <p class="lede">
-      Una membresía para crear tus propias herramientas y automatizar tu trabajo
-      con inteligencia artificial. Estamos afinando los detalles.
-    </p>
-  </main>
+<!-- ============================================================
+     NAV
+     ============================================================ -->
+<nav class="nav" role="navigation" aria-label="Navegación principal">
+  <div class="nav-inner">
 
-  <footer>
-    <span>© 2026 SUYTEX LLC</span>
-    <a href="mailto:hola@suytex.com">ESCRÍBENOS →</a>
-  </footer>
+    <a href="#" class="nav-logo" aria-label="Suytex Academy — inicio">
+      <span class="nav-bullet" aria-hidden="true"></span>
+      <span class="nav-wordmark">Suytex</span>
+    </a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="#mundos">Entrenamientos</a></li>
+      <li><a href="#comunidad">Comunidad</a></li>
+      <li><a href="#sobre">Sobre</a></li>
+    </ul>
+
+    <a href="https://wa.me/18096399999"
+       class="btn btn-primary btn-sm"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Contáctanos por WhatsApp">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="1.5"
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7
+                 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8
+                 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5
+                 a8.48 8.48 0 0 1 8 8v.5z"/>
+      </svg>
+      WhatsApp
+    </a>
+
+  </div>
+</nav>
+
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero" aria-labelledby="hero-heading">
+  <p class="su-caption hero-caption">Academia para quienes construyen</p>
+
+  <h1 id="hero-heading" class="su-title hero-title">
+    Para quienes construyen,<br>
+    <span class="su-gradient-text">no solo aprenden.</span>
+  </h1>
+
+  <p class="su-body hero-body">
+    AI, trading, crypto y portafolios. Cuatro mundos, una academia
+    para profesionales hispanos que van en serio.
+  </p>
+
+  <div class="hero-ctas">
+    <a href="#mundos" class="btn btn-primary">Explorar entrenamientos</a>
+    <a href="#comunidad" class="btn btn-secondary">Unirme a la comunidad</a>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     COMUNIDAD
+     ============================================================ -->
+<section id="comunidad" class="section section-ink" aria-labelledby="comunidad-heading">
+  <div class="container">
+    <div class="comunidad-wrap">
+      <div class="comunidad-card">
+
+        <div class="comunidad-header">
+          <!-- Icon: users -->
+          <svg class="su-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+          <h2 id="comunidad-heading" class="su-title comunidad-title">Comunidad Suytex</h2>
+        </div>
+
+        <p class="su-body">Acceso · mentoría · red — transversal a los 4 mundos.</p>
+
+        <span class="cap-pill">Membership</span>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     LOS 4 MUNDOS
+     ============================================================ -->
+<section id="mundos" class="section" aria-labelledby="mundos-heading">
+  <div class="container">
+
+    <div class="mundos-header">
+      <p class="su-caption" id="mundos-heading">Los 4 mundos</p>
+    </div>
+
+    <div class="mundos-grid">
+
+      <!-- AI -->
+      <article class="mundo-card">
+        <!-- Icon: cpu -->
+        <svg class="su-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="4" y="4" width="16" height="16" rx="2"/>
+          <rect x="8" y="8" width="8" height="8"/>
+          <line x1="4" y1="9" x2="2" y2="9"/>
+          <line x1="4" y1="15" x2="2" y2="15"/>
+          <line x1="22" y1="9" x2="20" y2="9"/>
+          <line x1="22" y1="15" x2="20" y2="15"/>
+          <line x1="9" y1="4" x2="9" y2="2"/>
+          <line x1="15" y1="4" x2="15" y2="2"/>
+          <line x1="9" y1="22" x2="9" y2="20"/>
+          <line x1="15" y1="22" x2="15" y2="20"/>
+        </svg>
+        <p class="mundo-name">AI</p>
+        <p class="mundo-course">AI Productivity Experience</p>
+        <p class="mundo-meta">5 días · 21 herramientas</p>
+        <hr class="su-rule mundo-rule" />
+        <p class="mundo-service">+ Automatización a medida</p>
+        <a href="https://ai.suytex.com"
+           class="mundo-link"
+           target="_blank"
+           rel="noopener noreferrer">Entrar →</a>
+      </article>
+
+      <!-- Trading -->
+      <article class="mundo-card">
+        <!-- Icon: trending-up -->
+        <svg class="su-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+          <polyline points="17 6 23 6 23 12"/>
+        </svg>
+        <p class="mundo-name">Trading</p>
+        <p class="mundo-course">Suytex Trading Experience</p>
+        <p class="mundo-meta">4 días · $497</p>
+        <hr class="su-rule mundo-rule" />
+        <p class="mundo-service">+ Mentoría 1:1</p>
+        <a href="https://trading.suytex.com"
+           class="mundo-link"
+           target="_blank"
+           rel="noopener noreferrer">Entrar →</a>
+      </article>
+
+      <!-- Crypto -->
+      <article class="mundo-card">
+        <!-- Icon: bitcoin (circle + B strokes) -->
+        <svg class="su-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M9.5 8H14a2.5 2.5 0 0 1 0 5H9.5V8z"/>
+          <path d="M9.5 13H14.5a2.5 2.5 0 0 1 0 5H9.5v-5z"/>
+          <line x1="10.5" y1="8" x2="10.5" y2="6.5"/>
+          <line x1="13" y1="8" x2="13" y2="6.5"/>
+          <line x1="10.5" y1="18" x2="10.5" y2="19.5"/>
+          <line x1="13" y1="18" x2="13" y2="19.5"/>
+        </svg>
+        <p class="mundo-name">Crypto</p>
+        <p class="mundo-course">Tu primer Bitcoin</p>
+        <p class="mundo-meta">5 días · $497</p>
+        <hr class="su-rule mundo-rule" />
+        <p class="mundo-service">+ Swing y señales</p>
+        <a href="https://crypto.suytex.com"
+           class="mundo-link"
+           target="_blank"
+           rel="noopener noreferrer">Entrar →</a>
+      </article>
+
+      <!-- Portafolios -->
+      <article class="mundo-card">
+        <!-- Icon: pie-chart -->
+        <svg class="su-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M21.21 15.89A10 10 0 1 1 8 2.83"/>
+          <path d="M22 12A10 10 0 0 0 12 2v10z"/>
+        </svg>
+        <p class="mundo-name">Portafolios</p>
+        <p class="mundo-course">Portafolios Experience</p>
+        <p class="mundo-meta">En vivo</p>
+        <hr class="su-rule mundo-rule" />
+        <p class="mundo-service">+ Manejo de portafolios</p>
+        <a href="https://portafolios.suytex.com"
+           class="mundo-link"
+           target="_blank"
+           rel="noopener noreferrer">Entrar →</a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SOBRE FRANCISCO
+     ============================================================ -->
+<section id="sobre" class="section section-ink" aria-labelledby="sobre-heading">
+  <div class="container">
+    <div class="su-card sobre-card">
+
+      <div class="avatar-tile" aria-hidden="true">FJ</div>
+
+      <div class="sobre-text">
+        <h2 id="sobre-heading" class="su-title sobre-name">Francisco</h2>
+        <p class="su-body">
+          Trader, educador y 15+ años en infraestructura IT.
+          El que diseña, opera y enseña — no teoría de salón.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     CTA FINAL
+     ============================================================ -->
+<section class="cta-final" aria-labelledby="cta-heading">
+  <div class="container-narrow">
+
+    <h2 id="cta-heading" class="su-title cta-title">
+      ¿Listo para <span class="su-gradient-text">construir?</span>
+    </h2>
+
+    <p class="su-body cta-body">Hablemos por WhatsApp y elige tu mundo.</p>
+
+    <div class="cta-ctas">
+      <a href="https://wa.me/18096399999"
+         class="btn btn-primary"
+         target="_blank"
+         rel="noopener noreferrer"
+         aria-label="Contáctanos por WhatsApp al 809-639-9999">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="1.5"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7
+                   8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8
+                   8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5
+                   a8.48 8.48 0 0 1 8 8v.5z"/>
+        </svg>
+        809-639-9999
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer role="contentinfo">
+  <div class="footer-inner">
+    <span class="footer-wordmark su-gradient-text">Suytex</span>
+    <span class="footer-worlds">ai · trading · crypto · portafolios</span>
+  </div>
+</footer>
+
 </body>
 </html>
