@@ -22,16 +22,16 @@
    VARIABLES
    ============================================================ */
 :root {
-  --bg:         #0A0A0A;
-  --surface:    #111111;
-  --card:       #171717;
-  --card-hover: #1C1C1C;
-  --text:       #EDEDE9;
-  --muted:      #7C7C7A;
+  --bg:         #070B1A;
+  --surface:    #0B1024;
+  --card:       #111831;
+  --card-hover: #16203F;
+  --text:       #F2F5FA;
+  --muted:      #8A93A8;
   --border:     rgba(255, 255, 255, 0.07);
-  --gold:       #C8963C;
-  --gold-lt:    #DDA84E;
-  --gold-soft:  rgba(200, 150, 60, 0.13);
+  --brand:       #2563EB;
+  --brand-lt:    #3B82F6;
+  --brand-soft:  rgba(37, 99, 235, 0.13);
   --pill:       999px;
   --radius:     12px;
 }
@@ -59,7 +59,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(10, 10, 10, 0.88);
+  background: rgba(7, 11, 26, 0.88);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border);
@@ -88,7 +88,7 @@ body {
   width: 10px;
   height: 10px;
   border-radius: 3px;
-  background: var(--gold);
+  background: var(--brand);
   flex-shrink: 0;
 }
 
@@ -99,6 +99,12 @@ body {
   letter-spacing: 0.32em;
   text-transform: uppercase;
   color: var(--text);
+}
+
+.nav-wordmark .nav-sub {
+  margin-left: 0.42em;
+  font-weight: 400;
+  color: var(--muted);
 }
 
 .nav-links {
@@ -138,17 +144,17 @@ body {
 
 .btn:hover { opacity: 0.82; }
 
-.btn-gold {
-  background: var(--gold);
-  color: #1C0C00;
+.btn-brand {
+  background: var(--brand);
+  color: #FFFFFF;
   border-radius: var(--pill);
   padding: 12px 26px;
   font-size: 15px;
 }
 
-.btn-gold-sm {
-  background: var(--gold);
-  color: #1C0C00;
+.btn-brand-sm {
+  background: var(--brand);
+  color: #FFFFFF;
   border-radius: var(--pill);
   padding: 8px 17px;
   font-size: 12px;
@@ -156,8 +162,8 @@ body {
 
 .btn-outline {
   background: transparent;
-  border: 1px solid rgba(200, 150, 60, 0.38);
-  color: var(--gold);
+  border: 1px solid rgba(37, 99, 235, 0.38);
+  color: var(--brand);
   border-radius: var(--pill);
   padding: 12px 26px;
   font-size: 15px;
@@ -201,7 +207,7 @@ body {
   width: 920px;
   height: 560px;
   max-width: 130vw;
-  background: radial-gradient(ellipse at center, var(--gold-soft) 0%, transparent 68%);
+  background: radial-gradient(ellipse at center, var(--brand-soft) 0%, transparent 68%);
   filter: blur(30px);
   pointer-events: none;
   animation: breathe 8s ease-in-out infinite;
@@ -221,7 +227,7 @@ body {
   left: 18%;
   width: 46%;
   height: 70%;
-  background: radial-gradient(circle, rgba(200, 150, 60, 0.16) 0%, transparent 64%);
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.16) 0%, transparent 64%);
   filter: blur(36px);
   animation: drift-a 13s ease-in-out infinite;
 }
@@ -231,7 +237,7 @@ body {
   right: 16%;
   width: 42%;
   height: 64%;
-  background: radial-gradient(circle, rgba(221, 168, 78, 0.13) 0%, transparent 64%);
+  background: radial-gradient(circle, rgba(96, 165, 250, 0.13) 0%, transparent 64%);
   filter: blur(40px);
   animation: drift-b 17s ease-in-out infinite;
 }
@@ -274,7 +280,7 @@ body {
   font-size: 11px;
   letter-spacing: 0.30em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--brand);
   margin-bottom: 28px;
 }
 
@@ -291,7 +297,7 @@ body {
 
 .hero-title .accent,
 .cta-title .accent {
-  background: linear-gradient(110deg, var(--gold) 0%, #F0D58A 38%, var(--gold-lt) 62%, var(--gold) 100%);
+  background: linear-gradient(110deg, var(--brand) 0%, #93C5FD 38%, var(--brand-lt) 62%, var(--brand) 100%);
   background-size: 220% auto;
   -webkit-background-clip: text;
   background-clip: text;
@@ -329,7 +335,7 @@ body {
 }
 
 .comunidad-card {
-  border-left: 3px solid var(--gold);
+  border-left: 3px solid var(--brand);
   background: var(--card);
   border-radius: 0 var(--radius) var(--radius) 0;
   padding: 32px;
@@ -339,7 +345,7 @@ body {
   transition: border-color 0.2s;
 }
 
-.comunidad-card:hover { border-color: var(--gold-lt); }
+.comunidad-card:hover { border-color: var(--brand-lt); }
 
 .comunidad-header {
   display: flex;
@@ -351,8 +357,8 @@ body {
   width: 44px;
   height: 44px;
   border-radius: 10px;
-  background: var(--gold-soft);
-  border: 1px solid rgba(200, 150, 60, 0.18);
+  background: var(--brand-soft);
+  border: 1px solid rgba(37, 99, 235, 0.18);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -360,7 +366,7 @@ body {
 }
 
 .icon-box svg {
-  stroke: var(--gold);
+  stroke: var(--brand);
   stroke-width: 1.5;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -389,8 +395,8 @@ body {
   font-size: 10px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--gold);
-  border: 1px solid rgba(200, 150, 60, 0.28);
+  color: var(--brand);
+  border: 1px solid rgba(37, 99, 235, 0.28);
   border-radius: var(--pill);
   padding: 4px 13px;
 }
@@ -403,7 +409,7 @@ body {
   font-size: 11px;
   letter-spacing: 0.30em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--brand);
   text-align: center;
   margin-bottom: 14px;
 }
@@ -444,14 +450,14 @@ body {
   position: absolute;
   inset: 0;
   background: radial-gradient(340px circle at var(--mx, 50%) var(--my, 50%),
-              rgba(200, 150, 60, 0.12), transparent 62%);
+              rgba(37, 99, 235, 0.12), transparent 62%);
   opacity: 0;
   transition: opacity 0.3s;
   pointer-events: none;
 }
 
 .mundo-card:hover {
-  border-color: rgba(200, 150, 60, 0.32);
+  border-color: rgba(37, 99, 235, 0.32);
   background: var(--card-hover);
   transform: translateY(-4px);
   box-shadow: 0 18px 40px -22px rgba(0, 0, 0, 0.8);
@@ -470,7 +476,7 @@ body {
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: rgba(200, 150, 60, 0.42);
+  color: rgba(37, 99, 235, 0.42);
 }
 
 .mundo-name {
@@ -512,13 +518,13 @@ body {
   gap: 5px;
   font-size: 13px;
   font-weight: 600;
-  color: var(--gold);
+  color: var(--brand);
   text-decoration: none;
   margin-top: auto;
   transition: color 0.18s;
 }
 
-.mundo-link:hover { color: var(--gold-lt); }
+.mundo-link:hover { color: var(--brand-lt); }
 
 /* ============================================================
    SOBRE FRANCISCO
@@ -539,7 +545,7 @@ body {
   width: 54px;
   height: 54px;
   border-radius: 10px;
-  background: linear-gradient(135deg, var(--gold-lt), var(--gold));
+  background: linear-gradient(135deg, var(--brand-lt), var(--brand));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -547,7 +553,7 @@ body {
   font-family: "Space Grotesk", sans-serif;
   font-weight: 700;
   font-size: 17px;
-  color: #1C0C00;
+  color: #FFFFFF;
 }
 
 .sobre-text {
@@ -629,7 +635,7 @@ footer {
   font-size: 13px;
   letter-spacing: 0.30em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--brand);
 }
 
 .footer-worlds {
@@ -672,7 +678,7 @@ footer {
   .mundos-grid { grid-template-columns: 1fr; }
   .sobre-card { flex-direction: column; }
   .footer-inner { justify-content: flex-start; }
-  .btn-gold, .btn-outline { padding: 12px 22px; font-size: 14px; }
+  .btn-brand, .btn-outline { padding: 12px 22px; font-size: 14px; }
 }
 
 @media (max-width: 400px) {
@@ -684,7 +690,7 @@ footer {
    ACCESSIBILITY
    ============================================================ */
 :focus-visible {
-  outline: 2px solid var(--gold);
+  outline: 2px solid var(--brand);
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -717,7 +723,7 @@ footer {
 
     <a href="#" class="nav-logo" aria-label="Suytex Academy — inicio">
       <span class="nav-dot" aria-hidden="true"></span>
-      <span class="nav-wordmark">Suytex</span>
+      <span class="nav-wordmark">Suytex<span class="nav-sub">Academy</span></span>
     </a>
 
     <ul class="nav-links" role="list">
@@ -727,7 +733,7 @@ footer {
     </ul>
 
     <a href="https://wa.me/18096399999"
-       class="btn btn-gold-sm"
+       class="btn btn-brand-sm"
        target="_blank"
        rel="noopener noreferrer"
        aria-label="Contáctanos por WhatsApp">
@@ -758,7 +764,7 @@ footer {
     </p>
 
     <div class="hero-ctas" data-reveal>
-      <a href="#mundos" class="btn btn-gold">Explorar entrenamientos →</a>
+      <a href="#mundos" class="btn btn-brand">Explorar entrenamientos →</a>
       <a href="#comunidad" class="btn btn-outline">Unirme a la comunidad</a>
     </div>
   </div>
@@ -811,7 +817,7 @@ footer {
         <span class="mundo-num" aria-hidden="true">01</span>
         <div class="icon-box">
           <svg viewBox="0 0 24 24" aria-hidden="true"
-               stroke="var(--gold)" stroke-width="1.5"
+               stroke="var(--brand)" stroke-width="1.5"
                stroke-linecap="round" stroke-linejoin="round" fill="none"
                width="20" height="20">
             <rect x="4" y="4" width="16" height="16" rx="2"/>
@@ -840,7 +846,7 @@ footer {
         <span class="mundo-num" aria-hidden="true">02</span>
         <div class="icon-box">
           <svg viewBox="0 0 24 24" aria-hidden="true"
-               stroke="var(--gold)" stroke-width="1.5"
+               stroke="var(--brand)" stroke-width="1.5"
                stroke-linecap="round" stroke-linejoin="round" fill="none"
                width="20" height="20">
             <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
@@ -861,7 +867,7 @@ footer {
         <span class="mundo-num" aria-hidden="true">03</span>
         <div class="icon-box">
           <svg viewBox="0 0 24 24" aria-hidden="true"
-               stroke="var(--gold)" stroke-width="1.5"
+               stroke="var(--brand)" stroke-width="1.5"
                stroke-linecap="round" stroke-linejoin="round" fill="none"
                width="20" height="20">
             <circle cx="12" cy="12" r="10"/>
@@ -887,7 +893,7 @@ footer {
         <span class="mundo-num" aria-hidden="true">04</span>
         <div class="icon-box">
           <svg viewBox="0 0 24 24" aria-hidden="true"
-               stroke="var(--gold)" stroke-width="1.5"
+               stroke="var(--brand)" stroke-width="1.5"
                stroke-linecap="round" stroke-linejoin="round" fill="none"
                width="20" height="20">
             <path d="M21.21 15.89A10 10 0 1 1 8 2.83"/>
@@ -944,7 +950,7 @@ footer {
 
     <div class="cta-ctas" data-reveal>
       <a href="https://wa.me/18096399999"
-         class="btn btn-gold"
+         class="btn btn-brand"
          target="_blank"
          rel="noopener noreferrer"
          aria-label="Contáctanos por WhatsApp al 809-639-9999">
@@ -961,7 +967,7 @@ footer {
      ============================================================ -->
 <footer role="contentinfo">
   <div class="footer-inner">
-    <span class="footer-wordmark">Suytex</span>
+    <span class="footer-wordmark">Suytex<span class="nav-sub">Academy</span></span>
     <span class="footer-worlds">ai · trading · crypto · portafolios</span>
   </div>
 </footer>
