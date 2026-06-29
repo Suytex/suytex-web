@@ -192,24 +192,75 @@ body {
   overflow: hidden;
 }
 
-/* Glow ambiental */
+/* Aurora ambiental — dos capas que respiran y derivan */
 .hero-glow {
   position: absolute;
-  top: 55%;
+  top: 52%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 880px;
-  height: 520px;
+  width: 920px;
+  height: 560px;
+  max-width: 130vw;
   background: radial-gradient(ellipse at center, var(--gold-soft) 0%, transparent 68%);
-  filter: blur(28px);
+  filter: blur(30px);
   pointer-events: none;
   animation: breathe 8s ease-in-out infinite;
   z-index: 0;
 }
 
+.hero-glow::before,
+.hero-glow::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero-glow::before {
+  top: 8%;
+  left: 18%;
+  width: 46%;
+  height: 70%;
+  background: radial-gradient(circle, rgba(200, 150, 60, 0.16) 0%, transparent 64%);
+  filter: blur(36px);
+  animation: drift-a 13s ease-in-out infinite;
+}
+
+.hero-glow::after {
+  bottom: 4%;
+  right: 16%;
+  width: 42%;
+  height: 64%;
+  background: radial-gradient(circle, rgba(221, 168, 78, 0.13) 0%, transparent 64%);
+  filter: blur(40px);
+  animation: drift-b 17s ease-in-out infinite;
+}
+
 @keyframes breathe {
-  0%, 100% { opacity: 0.65; transform: translate(-50%, -50%) scale(1); }
-  50%       { opacity: 1;    transform: translate(-50%, -50%) scale(1.18); }
+  0%, 100% { opacity: 0.6;  transform: translate(-50%, -50%) scale(1); }
+  50%       { opacity: 0.95; transform: translate(-50%, -50%) scale(1.16); }
+}
+
+@keyframes drift-a {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%       { transform: translate(8%, 6%) scale(1.12); }
+}
+
+@keyframes drift-b {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%       { transform: translate(-7%, -5%) scale(1.1); }
+}
+
+/* Grano fílmico — textura sutil sobre todo el sitio */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+  mix-blend-mode: overlay;
 }
 
 .hero-inner {
@@ -238,7 +289,20 @@ body {
   margin: 0 auto 28px;
 }
 
-.hero-title .accent { color: var(--gold); }
+.hero-title .accent,
+.cta-title .accent {
+  background: linear-gradient(110deg, var(--gold) 0%, #F0D58A 38%, var(--gold-lt) 62%, var(--gold) 100%);
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 7s linear infinite;
+}
+
+@keyframes shimmer {
+  to { background-position: 220% center; }
+}
 
 .hero-body {
   font-size: clamp(1rem, 2vw, 1.15rem);
@@ -362,19 +426,51 @@ body {
 }
 
 .mundo-card {
+  position: relative;
+  overflow: hidden;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 24px;
+  padding: 26px 24px 24px;
   display: flex;
   flex-direction: column;
   gap: 11px;
-  transition: border-color 0.22s, background 0.22s;
+  transition: border-color 0.25s, background 0.25s, transform 0.25s, box-shadow 0.25s;
+}
+
+/* Glow dorado que sigue el cursor */
+.mundo-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(340px circle at var(--mx, 50%) var(--my, 50%),
+              rgba(200, 150, 60, 0.12), transparent 62%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
 }
 
 .mundo-card:hover {
-  border-color: rgba(200, 150, 60, 0.28);
+  border-color: rgba(200, 150, 60, 0.32);
   background: var(--card-hover);
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px -22px rgba(0, 0, 0, 0.8);
+}
+
+.mundo-card:hover::before { opacity: 1; }
+
+.mundo-card > * { position: relative; z-index: 1; }
+
+.mundo-num {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  z-index: 1;
+  font-family: "Space Mono", monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgba(200, 150, 60, 0.42);
 }
 
 .mundo-name {
@@ -493,7 +589,6 @@ body {
   margin-bottom: 16px;
 }
 
-.cta-title .accent { color: var(--gold); }
 
 .cta-body {
   font-size: 16px;
@@ -546,6 +641,28 @@ footer {
 }
 
 /* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+[data-reveal].in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Stagger para las cards de los mundos */
+.mundos-grid [data-reveal]:nth-child(1) { transition-delay: 0.00s; }
+.mundos-grid [data-reveal]:nth-child(2) { transition-delay: 0.08s; }
+.mundos-grid [data-reveal]:nth-child(3) { transition-delay: 0.16s; }
+.mundos-grid [data-reveal]:nth-child(4) { transition-delay: 0.24s; }
+
+/* ============================================================
    RESPONSIVE
    ============================================================ */
 @media (max-width: 640px) {
@@ -574,11 +691,23 @@ footer {
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .hero-glow { animation: none; }
+  .hero-glow,
+  .hero-glow::before,
+  .hero-glow::after,
+  .hero-title .accent,
+  .cta-title .accent { animation: none; }
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 </style>
 </head>
 <body>
+
+<!-- Grano fílmico global -->
+<div class="grain" aria-hidden="true"></div>
 
 <!-- ============================================================
      NAV
@@ -616,19 +745,19 @@ footer {
   <div class="hero-glow" aria-hidden="true"></div>
 
   <div class="hero-inner">
-    <span class="hero-caption">Academia para quienes construyen</span>
+    <span class="hero-caption" data-reveal>Academia para quienes construyen</span>
 
-    <h1 id="hero-heading" class="hero-title">
+    <h1 id="hero-heading" class="hero-title" data-reveal>
       Para quienes<br>construyen, no solo<br>
       <span class="accent">aprenden.</span>
     </h1>
 
-    <p class="hero-body">
+    <p class="hero-body" data-reveal>
       AI, trading, crypto y portafolios. Cuatro mundos,
       una academia para profesionales hispanos que van en serio.
     </p>
 
-    <div class="hero-ctas">
+    <div class="hero-ctas" data-reveal>
       <a href="#mundos" class="btn btn-gold">Explorar entrenamientos →</a>
       <a href="#comunidad" class="btn btn-outline">Unirme a la comunidad</a>
     </div>
@@ -642,7 +771,7 @@ footer {
 <section id="comunidad" class="section section-alt" aria-labelledby="comunidad-heading">
   <div class="container">
     <div class="comunidad-wrap">
-      <div class="comunidad-card">
+      <div class="comunidad-card" data-reveal>
 
         <div class="comunidad-header">
           <div class="icon-box">
@@ -672,13 +801,14 @@ footer {
 <section id="mundos" class="section" aria-labelledby="mundos-heading">
   <div class="container">
 
-    <p class="section-label">Los 4 mundos</p>
-    <h2 id="mundos-heading" class="section-title">Elige tu mundo</h2>
+    <p class="section-label" data-reveal>Los 4 mundos</p>
+    <h2 id="mundos-heading" class="section-title" data-reveal>Elige tu mundo</h2>
 
     <div class="mundos-grid">
 
       <!-- AI -->
-      <article class="mundo-card">
+      <article class="mundo-card" data-reveal>
+        <span class="mundo-num" aria-hidden="true">01</span>
         <div class="icon-box">
           <svg viewBox="0 0 24 24" aria-hidden="true"
                stroke="var(--gold)" stroke-width="1.5"
@@ -706,7 +836,8 @@ footer {
       </article>
 
       <!-- Trading -->
-      <article class="mundo-card">
+      <article class="mundo-card" data-reveal>
+        <span class="mundo-num" aria-hidden="true">02</span>
         <div class="icon-box">
           <svg viewBox="0 0 24 24" aria-hidden="true"
                stroke="var(--gold)" stroke-width="1.5"
@@ -726,7 +857,8 @@ footer {
       </article>
 
       <!-- Crypto -->
-      <article class="mundo-card">
+      <article class="mundo-card" data-reveal>
+        <span class="mundo-num" aria-hidden="true">03</span>
         <div class="icon-box">
           <svg viewBox="0 0 24 24" aria-hidden="true"
                stroke="var(--gold)" stroke-width="1.5"
@@ -751,7 +883,8 @@ footer {
       </article>
 
       <!-- Portafolios -->
-      <article class="mundo-card">
+      <article class="mundo-card" data-reveal>
+        <span class="mundo-num" aria-hidden="true">04</span>
         <div class="icon-box">
           <svg viewBox="0 0 24 24" aria-hidden="true"
                stroke="var(--gold)" stroke-width="1.5"
@@ -780,7 +913,7 @@ footer {
      ============================================================ -->
 <section id="sobre" class="section section-alt" aria-labelledby="sobre-heading">
   <div class="container">
-    <div class="sobre-card">
+    <div class="sobre-card" data-reveal>
 
       <div class="avatar-tile" aria-hidden="true">FJ</div>
 
@@ -803,13 +936,13 @@ footer {
 <section class="cta-final" aria-labelledby="cta-heading">
   <div class="container-narrow">
 
-    <h2 id="cta-heading" class="cta-title">
+    <h2 id="cta-heading" class="cta-title" data-reveal>
       ¿Listo para <span class="accent">construir?</span>
     </h2>
 
-    <p class="cta-body">Hablemos por WhatsApp y elige tu mundo.</p>
+    <p class="cta-body" data-reveal>Hablemos por WhatsApp y elige tu mundo.</p>
 
-    <div class="cta-ctas">
+    <div class="cta-ctas" data-reveal>
       <a href="https://wa.me/18096399999"
          class="btn btn-gold"
          target="_blank"
@@ -832,6 +965,40 @@ footer {
     <span class="footer-worlds">ai · trading · crypto · portafolios</span>
   </div>
 </footer>
+
+<script>
+(function () {
+  var reduce = window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* --- Scroll reveal --- */
+  var revealEls = document.querySelectorAll("[data-reveal]");
+  if (reduce || !("IntersectionObserver" in window)) {
+    revealEls.forEach(function (el) { el.classList.add("in"); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add("in");
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.14, rootMargin: "0px 0px -8% 0px" });
+    revealEls.forEach(function (el) { io.observe(el); });
+  }
+
+  /* --- Glow que sigue el cursor en las cards --- */
+  if (!reduce) {
+    document.querySelectorAll(".mundo-card").forEach(function (card) {
+      card.addEventListener("pointermove", function (ev) {
+        var r = card.getBoundingClientRect();
+        card.style.setProperty("--mx", (ev.clientX - r.left) + "px");
+        card.style.setProperty("--my", (ev.clientY - r.top) + "px");
+      });
+    });
+  }
+})();
+</script>
 
 </body>
 </html>
