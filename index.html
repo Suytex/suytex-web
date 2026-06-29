@@ -647,6 +647,132 @@ footer {
 }
 
 /* ============================================================
+   LEAD MAGNET
+   ============================================================ */
+.lead-card {
+  position: relative;
+  overflow: hidden;
+  max-width: 720px;
+  margin: 0 auto;
+  background: var(--card);
+  border: 1px solid rgba(37, 99, 235, 0.22);
+  border-radius: var(--radius);
+  padding: 44px;
+}
+
+.lead-card::before {
+  content: "";
+  position: absolute;
+  top: -45%;
+  right: -12%;
+  width: 60%;
+  height: 130%;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.14) 0%, transparent 62%);
+  pointer-events: none;
+}
+
+.lead-content { position: relative; z-index: 1; }
+
+.lead-label {
+  display: inline-block;
+  font-family: "Space Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.30em;
+  text-transform: uppercase;
+  color: var(--brand);
+  margin-bottom: 14px;
+}
+
+.lead-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.5rem, 3.4vw, 2.1rem);
+  line-height: 1.14;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.lead-body {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 52ch;
+  margin-bottom: 22px;
+}
+
+.lead-body strong { color: var(--brand-lt); font-weight: 600; }
+
+.lead-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  margin-bottom: 30px;
+}
+
+.lead-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.lead-list li::before {
+  content: "";
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233B82F6' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+}
+
+/* ============================================================
+   BOTÓN FLOTANTE WHATSAPP
+   ============================================================ */
+.wa-fab {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 200;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #25D366;
+  color: #FFFFFF;
+  padding: 13px 19px;
+  border-radius: var(--pill);
+  font-family: "Inter", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.55);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: wa-pulse 2.8s ease-out infinite;
+}
+
+.wa-fab:hover { transform: translateY(-2px); }
+
+.wa-fab-icon { width: 22px; height: 22px; flex-shrink: 0; }
+
+.wa-fab-label { white-space: nowrap; }
+
+@keyframes wa-pulse {
+  0%   { box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.55), 0 0 0 0 rgba(37, 211, 102, 0.45); }
+  70%  { box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.55), 0 0 0 16px rgba(37, 211, 102, 0); }
+  100% { box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.55), 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+@media (max-width: 480px) {
+  .wa-fab { right: 16px; bottom: 16px; padding: 14px; }
+  .wa-fab-label { display: none; }
+}
+
+/* ============================================================
    SCROLL REVEAL
    ============================================================ */
 [data-reveal] {
@@ -701,7 +827,8 @@ footer {
   .hero-glow::before,
   .hero-glow::after,
   .hero-title .accent,
-  .cta-title .accent { animation: none; }
+  .cta-title .accent,
+  .wa-fab { animation: none; }
   [data-reveal] {
     opacity: 1;
     transform: none;
@@ -747,25 +874,28 @@ footer {
 <!-- ============================================================
      HERO
      ============================================================ -->
-<section class="hero" aria-labelledby="hero-heading">
+<section id="inicio" class="hero" aria-labelledby="hero-heading">
   <div class="hero-glow" aria-hidden="true"></div>
 
   <div class="hero-inner">
-    <span class="hero-caption" data-reveal>Academia para quienes construyen</span>
+    <!-- StoryBrand · pre-titular: identifica al cliente -->
+    <span class="hero-caption" data-reveal>Para profesionales que quieren construir, no solo consumir</span>
 
+    <!-- StoryBrand · titular: la transformación deseada -->
     <h1 id="hero-heading" class="hero-title" data-reveal>
-      Para quienes<br>construyen, no solo<br>
-      <span class="accent">aprenden.</span>
+      Convierte la IA y los mercados<br>en tu <span class="accent">ventaja real.</span>
     </h1>
 
+    <!-- StoryBrand · subtitular: cómo se logra + credibilidad -->
     <p class="hero-body" data-reveal>
-      AI, trading, crypto y portafolios. Cuatro mundos,
-      una academia para profesionales hispanos que van en serio.
+      Suytex Academy es la membresía donde aprendes haciendo — IA, trading, crypto
+      y portafolios — guiado por Francisco, trader y educador con 15+ años operando
+      y enseñando. No teoría de salón.
     </p>
 
     <div class="hero-ctas" data-reveal>
       <a href="#mundos" class="btn btn-brand">Explorar entrenamientos →</a>
-      <a href="#comunidad" class="btn btn-outline">Unirme a la comunidad</a>
+      <a href="#recurso" class="btn btn-outline">Llévate la guía gratis</a>
     </div>
   </div>
 </section>
@@ -937,9 +1067,50 @@ footer {
 
 
 <!-- ============================================================
+     LEAD MAGNET — recurso gratis a cambio de un mensaje
+     ============================================================ -->
+<section id="recurso" class="section section-alt" aria-labelledby="recurso-heading">
+  <div class="container">
+    <div class="lead-card" data-reveal>
+      <div class="lead-content">
+
+        <span class="lead-label">Recurso gratis</span>
+
+        <h2 id="recurso-heading" class="lead-title">
+          Llévate gratis la guía:<br>
+          <span class="accent">«21 herramientas de IA para profesionales»</span>
+        </h2>
+
+        <p class="lead-body">
+          El stack exacto que usamos para automatizar trabajo real, con el caso de uso
+          de cada herramienta. Escríbenos la palabra <strong>GUÍA</strong> por WhatsApp
+          y te la enviamos al instante. Sin costo.
+        </p>
+
+        <ul class="lead-list">
+          <li>Las 21 herramientas, organizadas por tarea</li>
+          <li>Para qué sirve cada una — sin relleno</li>
+          <li>Por dónde empezar si vas en serio</li>
+        </ul>
+
+        <a href="https://wa.me/18094089999?text=Hola%2C%20quiero%20la%20gu%C3%ADa%20gratis%20de%20las%2021%20herramientas%20de%20IA.%20(GU%C3%8DA)"
+           class="btn btn-brand"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Pedir la guía gratis por WhatsApp">
+          Quiero la guía gratis →
+        </a>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
      CTA FINAL
      ============================================================ -->
-<section class="cta-final" aria-labelledby="cta-heading">
+<section id="empezar" class="cta-final" aria-labelledby="cta-heading">
   <div class="container-narrow">
 
     <h2 id="cta-heading" class="cta-title" data-reveal>
@@ -972,6 +1143,19 @@ footer {
   </div>
 </footer>
 
+<!-- ============================================================
+     BOTÓN FLOTANTE WHATSAPP — mensaje dinámico por sección
+     ============================================================ -->
+<a id="waFab" class="wa-fab"
+   href="https://wa.me/18094089999"
+   target="_blank" rel="noopener noreferrer"
+   aria-label="Escríbenos por WhatsApp">
+  <svg class="wa-fab-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M12 2a10 10 0 0 0-8.6 15.05L2 22l5.05-1.32A10 10 0 1 0 12 2zm0 2a8 8 0 0 1 6.78 12.23l-.24.38.78 2.85-2.92-.77-.37.22A8 8 0 1 1 12 4zm-2.85 4.2c-.15 0-.4.06-.6.28-.21.22-.8.78-.8 1.9 0 1.12.82 2.2.93 2.36.12.15 1.6 2.55 3.94 3.48 1.95.77 2.35.62 2.77.58.42-.04 1.37-.56 1.56-1.1.2-.54.2-1 .14-1.1-.06-.1-.22-.16-.46-.28-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.93-1.19-.71-.64-1.19-1.42-1.33-1.66-.14-.24-.01-.37.11-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.4-.4-.54-.41h-.46z"/>
+  </svg>
+  <span class="wa-fab-label" id="waFabLabel">Escríbenos</span>
+</a>
+
 <script>
 (function () {
   var reduce = window.matchMedia &&
@@ -1001,6 +1185,47 @@ footer {
         card.style.setProperty("--mx", (ev.clientX - r.left) + "px");
         card.style.setProperty("--my", (ev.clientY - r.top) + "px");
       });
+    });
+  }
+
+  /* --- WhatsApp flotante: mensaje dinámico según la sección visible --- */
+  var fab = document.getElementById("waFab");
+  var fabLabel = document.getElementById("waFabLabel");
+  var WA = "https://wa.me/18094089999";
+  var MESSAGES = {
+    inicio:    { label: "Escríbenos",            text: "Hola, quiero saber más sobre Suytex Academy." },
+    comunidad: { label: "Unirme a la comunidad", text: "Hola, me interesa la Comunidad Suytex. ¿Cómo entro?" },
+    mundos:    { label: "Quiero info",           text: "Hola, quiero información de los entrenamientos de Suytex." },
+    recurso:   { label: "Quiero la guía",        text: "Hola, quiero la guía gratis de las 21 herramientas de IA. (GUÍA)" },
+    sobre:     { label: "Hablar con Francisco",  text: "Hola Francisco, quiero hablar sobre los entrenamientos." },
+    empezar:   { label: "Empezar ahora",         text: "Hola, estoy listo para empezar. ¿Cómo me uno?" }
+  };
+
+  function setFab(key) {
+    var m = MESSAGES[key] || MESSAGES.inicio;
+    if (!fab) return;
+    fab.href = WA + "?text=" + encodeURIComponent(m.text);
+    if (fabLabel) fabLabel.textContent = m.label;
+  }
+
+  setFab("inicio");
+
+  if (fab && "IntersectionObserver" in window) {
+    var ratios = {};
+    var secObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        ratios[e.target.id] = e.isIntersecting ? e.intersectionRatio : 0;
+      });
+      var top = null, max = 0;
+      Object.keys(ratios).forEach(function (id) {
+        if (ratios[id] > max) { max = ratios[id]; top = id; }
+      });
+      if (top) setFab(top);
+    }, { threshold: [0, 0.25, 0.5, 0.75, 1] });
+
+    ["inicio", "comunidad", "mundos", "recurso", "sobre", "empezar"].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) secObserver.observe(el);
     });
   }
 })();
